@@ -1,2 +1,3 @@
 # Proyecto-Battleship
-Proyecto de Battleshit de Programacion en Python
+Proyecto de Battleship de Programacion en Python
+Alamecenamiento de Versiones
