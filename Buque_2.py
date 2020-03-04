@@ -1,6 +1,6 @@
-from Barcos import Barcos
+from Flota import Flota
 import random
-class Buque_2(Barcos):
+class Buque_2(Flota):
     def __init__(self,pos_x,pos_y,vidas,orientacion):
         self.orientacion = orientacion
         super().__init__(pos_x,pos_y,vidas)
@@ -17,7 +17,7 @@ class Buque_2(Barcos):
                         rand_x = random.randrange(10)
                     elif y == rand_y and x == rand_x and field[y][x] != "B":
                         field[y][x] = "B"
-                        if y == 0 and field[y+1][x] != "B" and field[y+2][x] != "BB":
+                        if y == 0 and field[y+1][x] != "B":
                             field[1][x] = "B"
                         elif y == 9 and field[y-1][x] != "B":
                             field[8][x] = "B"

@@ -1,5 +1,5 @@
-from Barcos import Barcos
-class Buque_3(Barcos):
+from Flota import Flota
+class Buque_3(Flota):
     def __init__(self,pos_x,pos_y,vidas,orientacion):
         self.orientacion = orientacion
         super().__init__(pos_x,pos_y,vidas)
