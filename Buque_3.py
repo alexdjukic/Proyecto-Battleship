@@ -1,8 +1,8 @@
 from Flota import Flota
 class Buque_3(Flota):
-    def __init__(self,pos_x,pos_y,vidas,orientacion):
+    def __init__(self,pos_x,pos_y,orientacion):
         self.orientacion = orientacion
-        super().__init__(pos_x,pos_y,vidas)
+        super().__init__(pos_x,pos_y)
     
     def Posicion(self,field):
         rand_y = self.pos_y

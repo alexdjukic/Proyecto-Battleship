@@ -1,10 +1,9 @@
 class Usuario:
-    def __init__(self,username,nombre,edad,genero,puntos):
+    def __init__(self,username,nombre,edad,genero):
         self.username = username
         self.nombre = nombre
         self.edad = edad
         self.genero = genero
-        self.puntos = puntos
 
     def Mensaje(self,shots):
         if shots == 9:

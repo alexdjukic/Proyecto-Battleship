@@ -4,31 +4,28 @@ from Flota import Flota
 from Buque_3 import Buque_3
 from Buque_2 import Buque_2
 from Submarino import Submarino
-def Datos():
+def Datos(username):
     aux = True
     while aux == True:
-        username = input("Introduzca su nombre de usuario: ").lower()
-        user = list(username)
-        if len(username) > 30:
-            print("Introduzca un nombre de usuario mas corto")
-        for i in range(len(user)):
-            if user[i] == " ":
-                print("Introduzca un nombre de usuario sin espacios")
-                aux = True
-                break 
+        nombre = input("Introduzca su Nombre Completo:").lower()
+        if nombre == " ":
+            print("ingrese un nombre valido")
         else:
-            while True:
-                nombre = input("Introduzca su Nombre Completo:").lower()
-                if nombre == " ":
-                    print("ingrese un nombre valido")
-                else:
-                    break
-
-            edad = int(input("Introduzca su edad: "))
-            genero = input("Introduzca su genero: ").lower()
-            puntos = 0
-            user = Usuario(username,nombre,edad,genero,puntos)
             aux = False
+
+    edad = int(input("Introduzca su edad: "))
+    while True:
+        genero = input("Introduzca (m) para Masculino o (f) para Femenino: ").lower()
+        if genero == "m":
+            genero = "Masculino"
+            break
+        elif genero == "f":
+            genero = "Femenino"
+            break
+        else:
+            print("Introduzca una opcion valida")
+
+    user = Usuario(username,nombre,edad,genero)
     return user
 
 def Creacion_barcos(field):
@@ -40,7 +37,7 @@ def Creacion_barcos(field):
         orientacion = "Horizontal"
     rand_y = random.randrange(10)
     rand_x = random.randrange(10)
-    buque3 = Buque_3(rand_x,rand_y,3,orientacion)
+    buque3 = Buque_3(rand_x,rand_y,orientacion)
     buque3.Posicion(field)
 
     #Creacion de un Buque de 2 Posiciones
@@ -51,28 +48,28 @@ def Creacion_barcos(field):
         orientacion2 = "Horizontal"
     rand_y = random.randrange(10)
     rand_x = random.randrange(10)
-    buque2 = Buque_2(rand_x,rand_y,2,orientacion2)
+    buque2 = Buque_2(rand_x,rand_y,orientacion2)
     buque2.Posicion(field)
 
     #Creacion de los submarinos
     s1_y = random.randrange(10)
     s1_x = random.randrange(10)
-    sub1 = Submarino(s1_x,s1_y,1)
+    sub1 = Submarino(s1_x,s1_y)
     sub1.Posicion(field)
 
     s2_y = random.randrange(10)
     s2_x = random.randrange(10)
-    sub2 = Submarino(s2_x,s2_y,1)
+    sub2 = Submarino(s2_x,s2_y)
     sub2.Posicion(field)
 
     s3_y = random.randrange(10)
     s3_x = random.randrange(10)
-    sub3 = Submarino(s3_x,s3_y,1)
+    sub3 = Submarino(s3_x,s3_y)
     sub3.Posicion(field)
 
     s4_y = random.randrange(10)
     s4_x = random.randrange(10)
-    sub4 = Submarino(s4_x,s4_y,1)
+    sub4 = Submarino(s4_x,s4_y)
     sub4.Posicion(field)
 
     return field
@@ -104,18 +101,21 @@ def Game(field):
 
 def main():
     print("Bienvenido a Battleship")
-    aux = True
+    
     player = []
+    aux = True
     while aux == True:
-        opcion = input("Desea introducir sus datos: ").lower()
-        if opcion == "si":
-            user = Datos()
-            player.append(user)
-            aux = False
-        elif opcion == "no":
-            aux = False
-        else:
-            print("Introduzca una opcion valida")
+        username = input("Introduzca su nombre de usuario: ").lower()
+        usuario = list(username)
+        if len(username) > 30:
+            print("Introduzca un nombre de usuario mas corto")
+        for i in range(len(usuario)):
+            if usuario[i] == " ":
+                print("Introduzca un nombre de usuario sin espacios")
+            aux = False 
+    user = Datos(username)
+    player.append(user)
+        
             
 
     field = [["■","■","■","■","■","■","■","■","■","■"],
@@ -131,14 +131,14 @@ def main():
           
     creacion = Creacion_barcos(field)
     for i in range(len(creacion)):
-            print(creacion[i])
+        print(creacion[i])
     aux2 = True
     hits = 9
     shots = 0
     puntos = 0
+    missed = 0
     while aux2 == True:
         juego = Game(field)
-        print(juego)
         for i in range(len(creacion)):
             print(creacion[i])
         if juego == "Hit":
@@ -147,18 +147,27 @@ def main():
             puntos += 10
         elif juego == "Miss":
             shots += 1
+            missed += 1
             puntos -= 2
         if hits == 0:
             aux2 = False
+        print(juego)
         print(hits)
     for y in range(len(field)):
         for x in range(len(field[y])):
             if field[y][x] != "F" and field[y][x] != "X":
                 field[y][x] = "O"
-    for i in range(len(creacion)):
-        print(creacion[i])
+    
     for user in player:
         print(user.Mensaje(shots))
-    print("Usted obtuvo {} Puntos".format(puntos))
+    print("""
+        ------ Estadisticas ------
+        Username : {}
+        Disparos: {}
+        Puntaje: {}
+        Disparos Repetidos: {}
+            """.format(username,shots,puntos,missed))
+    for i in range(len(creacion)):
+        print(creacion[i])
 
 main()
