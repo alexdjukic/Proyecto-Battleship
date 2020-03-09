@@ -15,4 +15,5 @@ class Usuario:
         elif shots > 70 and shots <= 100:
             return "Considérese Perdedor, tiene que mejorar notablemente"
     
+    
 

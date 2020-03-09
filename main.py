@@ -8,12 +8,35 @@ def Datos(username):
     aux = True
     while aux == True:
         nombre = input("Introduzca su Nombre Completo:").lower()
+        name = list(nombre)
         if nombre == " ":
-            print("ingrese un nombre valido")
+            print("Ingrese un nombre valido")
+        elif nombre.isdecimal():
+            print("Ingrese un nombre valido")
         else:
-            aux = False
-
-    edad = int(input("Introduzca su edad: "))
+            aux2 = True
+            i = 0
+            while aux2 == True:
+                if i == len(name):
+                    aux2 = False
+                    aux = False
+                elif name[i].isdecimal():
+                    print("Ingrese un nombre valido")
+                    aux2 = False
+                else:
+                    i += 1
+                
+    aux = True
+    while aux == True:
+        edad = input("Introduzca su edad: ")
+        if edad.isdecimal():
+            edad = int(edad)
+            if edad >= 1:
+                aux = False
+            else:
+                print("Ingrese una edad valida")    
+        else:
+            print("Introduzca una edad valida")
     while True:
         genero = input("Introduzca (m) para Masculino o (f) para Femenino: ").lower()
         if genero == "m":
@@ -100,74 +123,90 @@ def Game(field):
                 return "Tiro Realizado intente de nuevo"
 
 def main():
-    print("Bienvenido a Battleship")
-    
-    player = []
-    aux = True
-    while aux == True:
-        username = input("Introduzca su nombre de usuario: ").lower()
-        usuario = list(username)
-        if len(username) > 30:
-            print("Introduzca un nombre de usuario mas corto")
-        for i in range(len(usuario)):
-            if usuario[i] == " ":
-                print("Introduzca un nombre de usuario sin espacios")
-            aux = False 
-    user = Datos(username)
-    player.append(user)
-        
-            
+    game = True
+    while game == True:
+        print("Bienvenido a Battleship")
+        player = []
+        aux = True
+        while aux == True:
+            username = input("Introduzca su nombre de usuario: ").lower()
+            usuario = list(username)
+            if len(username) > 30:
+                print("Introduzca un username mas corto")
+            else:
+                aux2 = True
+                i = 0
+                while aux2 == True:
+                    if i == len(usuario):
+                        aux2 = False
+                        aux = False
+                    elif usuario[i] == " ":
+                        print("Introduzca un username mas corto")
+                        aux2 = False
+                    else:
+                        i += 1
 
-    field = [["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"],
-             ["■","■","■","■","■","■","■","■","■","■"]]
+        us = Datos(username)
+        player.append(us)
+            
+        field = [["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"],
+                 ["■","■","■","■","■","■","■","■","■","■"]]
           
-    creacion = Creacion_barcos(field)
-    for i in range(len(creacion)):
-        print(creacion[i])
-    aux2 = True
-    hits = 9
-    shots = 0
-    puntos = 0
-    missed = 0
-    while aux2 == True:
-        juego = Game(field)
+        creacion = Creacion_barcos(field)
         for i in range(len(creacion)):
             print(creacion[i])
-        if juego == "Hit":
-            shots += 1
-            hits -= 1
-            puntos += 10
-        elif juego == "Miss":
-            shots += 1
-            missed += 1
-            puntos -= 2
-        if hits == 0:
-            aux2 = False
-        print(juego)
-        print(hits)
-    for y in range(len(field)):
-        for x in range(len(field[y])):
-            if field[y][x] != "F" and field[y][x] != "X":
-                field[y][x] = "O"
+        aux2 = True
+        hits = 9
+        shots = 0
+        puntos = 0
+        repetido = 0
+        while aux2 == True:
+            juego = Game(field)
+            for i in range(len(creacion)):
+                print(creacion[i])
+            if juego == "Hit":
+                shots += 1
+                hits -= 1
+                puntos += 10
+            elif juego == "Miss":
+                shots += 1
+                puntos -= 2
+            elif juego == "Tiro Realizado intente de nuevo":
+                repetido += 1
+            if hits == 0:
+                aux2 = False
+            print(juego)
+            print(hits)
+        for y in range(len(field)):
+            for x in range(len(field[y])):
+                if field[y][x] != "F" and field[y][x] != "X":
+                    field[y][x] = "O"
     
-    for user in player:
-        print(user.Mensaje(shots))
-    print("""
-        ------ Estadisticas ------
-        Username : {}
-        Disparos: {}
-        Puntaje: {}
-        Disparos Repetidos: {}
-            """.format(username,shots,puntos,missed))
-    for i in range(len(creacion)):
-        print(creacion[i])
+        for user in player:
+            print(user.Mensaje(shots))
+        print("""
+            ------ Estadisticas ------
+            Username : {}
+            Disparos: {}
+            Puntaje: {}
+            Disparos Repetidos: {}
+                """.format(username,shots,puntos,repetido))
+        for i in range(len(creacion)):
+            print(creacion[i])
+        aux3 = True
+        while aux3 == True:
+            opcion = input("Desea volver a jugar: (1) Si , (2) No: ")
+            if opcion == "2":
+                print("Gracias por jugar")
+                aux3 = False
+                game = False
 
 main()

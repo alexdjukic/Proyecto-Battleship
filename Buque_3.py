@@ -35,3 +35,6 @@ class Buque_3(Flota):
                             field[y][x-1] = "B"
                             field[y][x+1] = "B"
         return field
+    
+    def Accion(self):
+        return "Aterrizando Helicopteros"

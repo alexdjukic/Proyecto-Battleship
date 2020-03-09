@@ -82,6 +82,14 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
+                            elif y == 8:
+                                if field[y-1][x] != "B" and field[y][x-1] != "B" and field[y+1][x-1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+1] != "B":
+                                    field[y][x] = "B"
+                                    field[y+1][x] = "B"
+                                    aux = False
+                                else:
+                                    rand_y = random.randrange(10)
+                                    rand_x = random.randrange(10)
                             else:
                                 if field[y-1][x] != "B" and field[y][x-1] != "B" and field[y+1][x-1] != "B" and field[y+2][x] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
@@ -160,6 +168,14 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
+                            elif x == 8:
+                                if field[y-1][x] != "B" and field[y][x-1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+1] != "B":
+                                    field[y][x] = "B"
+                                    field[y][x+1] = "B"
+                                    aux = False
+                                else:
+                                    rand_y = random.randrange(10)
+                                    rand_x = random.randrange(10)
                             else:
                                 if field[y-1][x] != "B" and field[y-1][x+1] != "B" and field[y][x+2] != "B" and field[y][x-1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
@@ -170,3 +186,5 @@ class Buque_2(Flota):
                                     rand_x = random.randrange(10)
                       
         return field
+    def Accion(self):
+        return "Comunicando con Tierra y Miembros de la flota"
