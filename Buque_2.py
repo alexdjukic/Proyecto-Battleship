@@ -1,11 +1,35 @@
 from Flota import Flota
 import random
 class Buque_2(Flota):
+    """Clase hija de la clase Flota encargada de la creacion de los Buques de 2 posicones
+
+        Posee 3 constructores:
+        pos_x: Posicion x del barco dentro de la matriz field, definida por un numero aleatorio en la funcion Creacion_barcos()
+        pos_y: Posicon y del barco dentro de la amtriz field, definida por un numero aleatorio en la funcion Creacion_barcos()
+        orientacion: variable encargada de la orientacion del Buque dentro de la matriz, definida por un string en la funcion Creacion_barcos()
+    
+    """
     def __init__(self,pos_x,pos_y,orientacion):
         self.orientacion = orientacion
         super().__init__(pos_x,pos_y)
 
     def Posicion(self,field):
+        """Funcion encargada del posicionamiento del Buque de 2 posicones dentro de la amtriz field
+
+            Recibe como parametro la matriz field
+
+            Esta funcion chequea los distintos constructores del Buque de 2 posiciones y luego recorre la matriz field.
+            Una vez entra en esta funcion, esta cheque si la posicion xy definida por el constructor no coorresponde a un barco ya colocado, de ser asi, esta cambia los
+            numeros aleatorios por 2 nuevos para chequear de nuevo, en cambio, si la posiicon xy esta disponible, esta chequea 9 posibilidades si la orientacion es vertical y
+            9 posibilidades si la oriencacion es horizontal. Estas posibilidades estan definidas para que alrededor del Buque de 2 posiciones no se encuentre otro barco. De caso contrario,
+            esta cambia las posiones xy por nuevos numeros aleatorios para las posiciones x e y.
+
+            Una vez se han encontrado una posicion para el buque de 2 posiciones sin ninguna "B" al rededor, el barco es posicionado dentro de la matriz con una posicion mas hacia arriba o hacia abajo
+            dependiendo si y = 0 o y = 9 o una posicion mas hacia la izquierda o hacia la derecha si x = 0 o x = 9
+
+            La funcion retorna la matriz field con el buque de 2 posiciones ya en su lugar.
+        
+        """
         rand_y = self.pos_y
         rand_x = self.pos_x
         orientacion2 = self.orientacion

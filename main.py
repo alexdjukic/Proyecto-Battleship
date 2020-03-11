@@ -5,9 +5,21 @@ from Buque_3 import Buque_3
 from Buque_2 import Buque_2
 from Submarino import Submarino
 def Datos(username):
+    """ Funcion encargada de recopilar todos los datos del usuario para luegos enviarlos a la clase Usuario.
+
+        Recibe la variable username 
+
+        Parametros:
+        nombre: variable del nombre completo del usuario
+        edad: variable de la edad del usuario
+        genero: variable de genero del usuario
+        puntos: variable de puntos siempre igual a 0 al iniciar el juego
+
+        La funcion crea un objeto de la clase usuario con todos estos parametros y luego lo retorna
+    """
     aux = True
     while aux == True:
-        nombre = input("Introduzca su Nombre Completo:").lower()
+        nombre = input("Introduzca su Nombre Completo: ").lower()
         name = list(nombre)
         if nombre == " ":
             print("Ingrese un nombre valido")
@@ -47,11 +59,27 @@ def Datos(username):
             break
         else:
             print("Introduzca una opcion valida")
-
-    user = Usuario(username,nombre,edad,genero)
+    
+    puntos = 0
+    shots = 0
+    user = Usuario(username,nombre,edad,genero,puntos,shots)
     return user
 
 def Creacion_barcos(field):
+    """ Funcion encargada de la creacion del barco de 3 posiciones, el barco de 2 posiciones y de los 4 submarinos ademas de sus respectivos posicionamientos en el tablero de juego
+
+        Recibe la variable field que es la matriz utilizada como tablero de juego
+
+        Parametros:
+        buque3: variable del tipo Buque_3 que recibe como parametros 3 variables aleatorias (orientacion,pos_x,pos_y) para luego crear un objeto de la clase Buque_3 y luego posicionarlo
+        buque2: variable del tipo Buque_2 que recibe como parametros 3 variables aleatorias para luego crear un objeto de l aclase Buque_2 y posicionarlo
+        submarinos: 4 variables del tipo Submarino que reciben como parametro 2 variables aleatorias (s_x,s_y) para luego crear 4 objetos de la clase Submarino
+
+        Cada una de las variables utiliza la funcion Posicion() de su respectiva clase para posicionar los barcos dentro de la matriz
+
+        Retorna la matriz field con los barcos posicionados en ella identificados con "B"
+    
+    """
     #Creacion de un Buque de 3 Posiciones
     rand = random.randrange(2)
     if rand == 0:
@@ -99,15 +127,42 @@ def Creacion_barcos(field):
     
 
 def Game(field):
+    """ Funcion encargada del juego de Battleship
+
+        Recibe como parametros la matriz field con los barcos ya posicionados en ella
+
+        Parametros:
+        pos_x: El usuario seleciona una posicion x entre el 0 y el 9 que corresponden a las distintas posiciones horizontales dentro de la matriz
+        pos_y: El usuario selecciona una posicion y entre el 0 y el 9 que cooresponden a las posiciones verticales dentro de la matriz
+
+        El programa luego recorre la matriz, si la posicion xy introducida cooresponde a una "B" la iguala a "F" y la funcion retorna "Hit",
+        si esta posicion no es igual a "B" la iguala a "X" y retorna "Miss". Por otro lado, si esta posicion es igual a "F" o "X", la funncion retorna 
+        un mensaje de que el tiro ya fue realizado
+
+    """
     aux = True
+    x = False
+    y = False
     while aux == True:
-        pos_x = int(input("Introduzca un numero del 0 al 9 para la coordenada X: "))
-        if pos_x < 0 and pos_x > 9:
-            print("Introduzca una coordenada valida")
-        pos_y = int(input("Introduzca un numero del 0 al 9 para la coordenada Y:"))
-        if pos_y < 0 and pos_y > 9:
-            print("Introduzca una coordenada valida")
+        pos_x = input("Introduzca un numero del 0 al 9 para la coordenada X: ")
+        if pos_x.isdecimal():
+            pos_x = int(pos_x)
+            if pos_x < 0 and pos_x > 9:
+                print("Introduzca una coordenada valida")
+            else:
+                x = True
         else:
+            print("Introduzca una coordenada valida")
+        pos_y = input("Introduzca un numero del 0 al 9 para la coordenada Y:")
+        if pos_y.isdecimal():
+            pos_y = int(pos_y)
+            if pos_y < 0 and pos_y > 9:
+                print("Introduzca una coordenada valida")
+            else:
+                y = True
+        else:
+            print("Introduzca una coordenada valida")
+        if x == True and y == True:
             aux = False
     for y in range(len(field)):
         for x in range(len(field[y])):
@@ -123,6 +178,9 @@ def Game(field):
                 return "Tiro Realizado intente de nuevo"
 
 def main():
+    """  Funcion encargada de correr todo el programa
+
+    """
     game = True
     while game == True:
         print("Bienvenido a Battleship")
@@ -192,6 +250,7 @@ def main():
     
         for user in player:
             print(user.Mensaje(shots))
+            user.Write(puntos,shots)
         print("""
             ------ Estadisticas ------
             Username : {}
@@ -208,5 +267,9 @@ def main():
                 print("Gracias por jugar")
                 aux3 = False
                 game = False
+            elif opcion == "1":
+                aux3 = False
+            else:
+                print("Introduzca 1 o 2")
 
 main()
