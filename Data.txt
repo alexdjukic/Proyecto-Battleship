@@ -1,4 +1,6 @@
 ------------------------------------ DATOS ---------------------------------------------------
-[username,nombre,edad,genero,puntos]
+[username,nombre,edad,genero,puntos,disparos]
 ['alejo', 'alejandro', '20', 'Masculino', '90']
 ['juano', 'juan', '20', 'Masculino', '90']
+['alejo', 'alejandro', '20', 'Masculino', '90', '9']
+['peter', 'pedro', '23', 'Masculino', '80', '8']

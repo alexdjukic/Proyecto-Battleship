@@ -219,6 +219,7 @@ def main():
                  ["■","■","■","■","■","■","■","■","■","■"]]
           
         creacion = Creacion_barcos(field)
+        #Para efectos de correccion quitar los #
         for i in range(len(creacion)):
             print(creacion[i])
         aux2 = True
@@ -239,8 +240,21 @@ def main():
                 puntos -= 2
             elif juego == "Tiro Realizado intente de nuevo":
                 repetido += 1
-            if hits == 0:
-                aux2 = False
+            boat = True
+            x = 0
+            y = 0
+            while boat == True:
+                if field[y][x] == "B":
+                    boat = False
+                elif x == 9 and y == 9:
+                    aux2 = False
+                    boat = False
+                elif x == 9:
+                    x = 0
+                    y += 1
+                else:
+                    x += 1
+            #Para efectos de correccion quitar los #
             print(juego)
             print(hits)
         for y in range(len(field)):

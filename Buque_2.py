@@ -99,7 +99,7 @@ class Buque_2(Flota):
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
                             elif x == 9:
-                                if field[y-1][x] != "B" and field[y][x-1] != "B" and field[y+1][x-1] != "B" and field[y+2][x] != "B" and field[y+1][x] != "B":
+                                if field[y-1][x] != "B" and field[y][x+1] != "B" and field[y+1][x+1] != "B" and field[y+2][x] != "B" and field[y+1][x] != "B":
                                     field[y][x] = "B"
                                     field[y+1][x] = "B"
                                     aux = False

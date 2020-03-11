@@ -33,7 +33,6 @@ class Submarino(Flota):
                     if y == s_y and x == s_x and field[y][x] == "B":
                         s_y = random.randrange(10)
                         s_x = random.randrange(10)
-
                     elif y == s_y and x == s_x and field[y][x] != "B":
                         if y == 0 and x == 0:
                             if field[y][x+1] != "B" and field[y+1][x] != "B":
@@ -44,7 +43,7 @@ class Submarino(Flota):
                                 s_x = random.randrange(10)
                         elif y == 0 and x == 9:
                             if field[y][x-1] != "B" and field[y+1][x] != "B":
-                                field[y][x] == "B"
+                                field[y][x] = "B"
                                 aux = False
                             else:
                                 s_y = random.randrange(10)
@@ -65,7 +64,7 @@ class Submarino(Flota):
                                 s_x = random.randrange(10)
                         elif y == 0:
                             if field[y][x-1] != "B" and field[y][x+1] != "B" and field[y+1][x] != "B":
-                                field[y][x] == "B"
+                                field[y][x] = "B"
                                 aux = False
                             else:
                                 s_y = random.randrange(10)
