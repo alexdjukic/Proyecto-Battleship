@@ -223,7 +223,6 @@ def main():
         for i in range(len(creacion)):
             print(creacion[i])
         aux2 = True
-        hits = 9
         shots = 0
         puntos = 0
         repetido = 0
@@ -233,7 +232,6 @@ def main():
                 print(creacion[i])
             if juego == "Hit":
                 shots += 1
-                hits -= 1
                 puntos += 10
             elif juego == "Miss":
                 shots += 1
@@ -256,7 +254,6 @@ def main():
                     x += 1
             #Para efectos de correccion quitar los #
             print(juego)
-            print(hits)
         for y in range(len(field)):
             for x in range(len(field[y])):
                 if field[y][x] != "F" and field[y][x] != "X":
@@ -266,7 +263,7 @@ def main():
             print(user.Mensaje(shots))
             user.Write(puntos,shots)
         print("""
-            ------ Estadisticas ------
+            ------ Resumen de Juego ------
             Username : {}
             Disparos: {}
             Puntaje: {}
@@ -274,6 +271,8 @@ def main():
                 """.format(username,shots,puntos,repetido))
         for i in range(len(creacion)):
             print(creacion[i])
+        for user in player:
+            print(user.Estadisticas())
         aux3 = True
         while aux3 == True:
             opcion = input("Desea volver a jugar: (1) Si , (2) No: ")

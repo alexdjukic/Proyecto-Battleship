@@ -1,6 +1,12 @@
------------------------------------- DATOS ---------------------------------------------------
-[username,nombre,edad,genero,puntos,disparos]
-['alejo', 'alejandro', '20', 'Masculino', '90']
-['juano', 'juan', '20', 'Masculino', '90']
-['alejo', 'alejandro', '20', 'Masculino', '90', '9']
-['peter', 'pedro', '23', 'Masculino', '80', '8']
+alejo,alejandro,20,Masculino,86,11
+alejo,ale,12,Masculino,88,10
+juan,juan,12,Femenino,90,9
+a,a,2,Masculino,90,9
+a,a,2,Masculino,84,12
+juana,juana,12,Femenino,90,9
+san,dan,14,Femenino,90,9
+a,a,45,Femenino,90,9
+gil0034,gilbert,50,Masculino,90,9
+jefa,juana,44,Femenino,86,11
+alejo,alejandro,12,Masculino,72,18
+guru,gus,35,Masculino,88,10
