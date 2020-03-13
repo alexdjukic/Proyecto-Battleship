@@ -1,12 +1,8 @@
-alejo,alejandro,20,Masculino,86,11
-alejo,ale,12,Masculino,88,10
-juan,juan,12,Femenino,90,9
-a,a,2,Masculino,90,9
-a,a,2,Masculino,84,12
-juana,juana,12,Femenino,90,9
-san,dan,14,Femenino,90,9
-a,a,45,Femenino,90,9
-gil0034,gilbert,50,Masculino,90,9
-jefa,juana,44,Femenino,86,11
-alejo,alejandro,12,Masculino,72,18
-guru,gus,35,Masculino,88,10
+alejo,alejandro,20,Masculino,90,9
+juan,juan,12,Masculino,88,10
+peter005,pedro,34,Masculino,88,10
+alejo,alejandor,12,Masculino,84,12
+juliangamer,julian,5,Femenino,82,13
+xx/papitagamer,papita gamer,24,Masculino,90,9
+a,a,2,Masculino,82,13
+a,a,2,Masculino,-82,95

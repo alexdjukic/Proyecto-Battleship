@@ -53,7 +53,7 @@ class Usuario:
             data.write(str(self.shots) + "\n")
 
     def Estadisticas(self):
-        """Funcion encargada del calculo de las estadisticas de todos los juegos previamente jugados
+        """ Funcion encargada del calculo de las estadisticas de todos los juegos previamente jugados
 
             Es la funcion encargada de calcular el promedio de las edades de los jugadores, los puntos de los jugadores masculinos y 
             femeninos y el promedio de disparos utilizados por los jugadores.
@@ -92,7 +92,7 @@ class Usuario:
             for i in range(len(estadisticas)):
                 estadisticas[i][2] = int(estadisticas[i][2])
                 estadisticas[i][4] = int(estadisticas[i][4])
-                estadisticas[i][5] = int(estadisticas[i][5].strip())
+                estadisticas[i][5] = estadisticas[i][5].strip()
                 if estadisticas[i][2] >= 5 and estadisticas[i][2] <= 18:
                     edad5 += 1
                 elif estadisticas[i][2] >= 19 and estadisticas[i][2] <= 45:
@@ -113,20 +113,21 @@ class Usuario:
                     auxshots += 1
                     prom_shots += int(estadisticas[i][5])
 
-            if edad5 > edad19 and edad5 > edad46 and edad5 > edad61:
-                    prom_edad = "5-18"
-            elif edad19 > edad5 and edad19 > edad46 and edad19 > edad61:
-                    prom_edad = "19-46"
-            elif edad46 > edad5 and edad46 > edad19 and edad46 > edad61:
-                    prom_edad = "46-60"
-            elif edad61 > edad5 and edad61 > edad19 and edad61 > edad46:
-                    prom_edad = "61-100"   
+                if edad5 > edad19 and edad5 > edad46 and edad5 > edad61:
+                        prom_edad = "5-18"
+                elif edad19 > edad5 and edad19 > edad46 and edad19 > edad61:
+                        prom_edad = "19-46"
+                elif edad46 > edad5 and edad46 > edad19 and edad46 > edad61:
+                        prom_edad = "46-60"
+                elif edad61 > edad5 and edad61 > edad19 and edad61 > edad46:
+                        prom_edad = "61-100"   
             
-
-            prom_puntosm = prom_puntosm/auxm
-            prom_puntosf = prom_puntosf/auxf
-            prom_shots = prom_shots/auxshots
-                
+            if auxm > 0:
+                 prom_puntosm = int(prom_puntosm/auxm)
+            if auxf > 0:
+                prom_puntosf = int(prom_puntosf/auxf)
+            if auxshots > 0:
+                prom_shots = int(prom_shots/auxshots)
 
         return """      ------ Estadisticas ------
             Promedio de edad: {} años
@@ -135,5 +136,5 @@ class Usuario:
             Promedio de Disparos: {} disparos
         
         """.format(prom_edad,prom_puntosm,prom_puntosf,prom_shots)
-            
 
+    

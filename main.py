@@ -176,13 +176,87 @@ def Game(field):
                 return "Tiro Realizado intente de nuevo"
             elif y == pos_y and x == pos_x and field[y][x] == "F":
                 return "Tiro Realizado intente de nuevo"
+def Leaderboard():
+    """ Funcion encargada de escribir los datos del top 10 en su respectivo archivo txt
 
+        La funcion se encarga de leer el archivo Data.txt y crea una lista con el nombre de usuario del jugador,sus puntos y el numero
+        de disparos. Luego, esa lista la ordena de mayor a menor dependiendo de los puntos del jugador y crea una nueva lista llamada top10
+        la cual toma los primeros 10 jugadores de la lista ordenada y los guarda en esta nueva lista. Finalmente, toma la lista top10 y escribe
+        sus datos en el archivo Leaderboard.txt.
+
+        La funcion no retorna nada y es llamada desde el main
+    """
+    leaderboard = []
+    users = []
+    top10 = []
+    with open("Data.txt","r") as data:
+        for user in data:
+            users.append(user.split(","))
+        for i in range(len(users)):
+            leader = []
+            users[i][4] = int(users[i][4])
+            users[i][5] = users[i][5].strip()
+            leader.append(users[i][4])
+            leader.append(int(users[i][5]))
+            leader.append(users[i][0])
+            leaderboard.append(leader)
+
+    s_leader = sorted(leaderboard)
+    s_leader.reverse()
+    aux = True
+    i = 0
+    while aux == True:
+        if len(s_leader) < 9:
+            if i == len(s_leader):
+                aux = False
+            else:
+                top10.append(s_leader[i])
+                i += 1
+        elif len(s_leader) >= 9:
+            if i == 9:
+                aux = False
+            else:
+                top10.append(s_leader[i])
+                i += 1
+    with open("Leaderboard.txt","w") as leader:
+        for i in range(len(top10)):
+            leader.write(top10[i][2] + "/")
+            leader.write(str(top10[i][0]) + "/")
+            leader.write(str(top10[i][1]) + "\n")
+
+def Top10():
+    """ Funcion encargada de imprimir el Top 10 al principio de cada partida
+
+        La funcion se encarga de leer el archivo Leaderboard.txt y luego imprime cad uno de sus jugadores con sus puntajes y 
+        sus disparos al inicio del juego.
+
+        la funcion no retorna nada solo imprime 
+    
+    """
+    with open("Leaderboard.txt","r") as leader:
+        print("---Top 10---")
+        for player in leader:
+            player = player.strip()
+            print(player)
+        
 def main():
     """  Funcion encargada de correr todo el programa
+
+        La funcion primero llama a Top 10 para imprimir los 10 mejores jugadores con sus puntajes, luego se encarga de pedir el nombre de 
+        usuario al jugador y llama a la funcion Datos para pedir los respectivos datos del jugador. Luego de recibir todos los datos, procede a 
+        iniciar el juego llamando a la funcion Creacion_barcos y utiliza un ciclo while para dar inicio al juego. Dentro de este ciclo, se llama
+        a la funcion Game y esta dependiendo si retorna "Hit","Miss" o "Tiro repetido", la funcion main suma o resta puntos y enel caso de
+        tiro repetido suma al contador de tiros repetidos ademas de sumar al contador de tiros. Una vez el jugador le ha dado a todos los barcos,
+        el juego finaliza y se hace llamado a los metodos de usuario Mensaje, Write y Estadisticas para que cada uno haga su funcion y tambien se 
+        llama a la funcion Leaderboard para chequear si el usuario entra en el top 10 de los jugadores. Finalmente, se muestra un resumen de los
+        datos de la partida y el mapa con las posiciones de los barcos ya hundidos, las posiciones falladas y las posiciones que el jugador no
+        golpeo. Al finalizar se le pregunta al jugador si desea volver a jugar, en caso afirmativo inicia el juego nuevamente y en caso negativo
+        se agradece al jugador por participar en el juego.
 
     """
     game = True
     while game == True:
+        Top10()
         print("Bienvenido a Battleship")
         player = []
         aux = True
@@ -206,6 +280,25 @@ def main():
 
         us = Datos(username)
         player.append(us)
+        aux = True
+        while aux == True:
+            opcion = input("Desea introducir un cheat: (1) Si, (2) No: ")
+            if opcion == "1":
+                aux1 = True
+                while aux1 == True:
+                    clave = input("Introduzca el cheat: ")
+                    if clave == "correccion":
+                        print("Radar Activado")
+                        aux1 = False
+                        aux = False
+                    else:
+                        print("Introduzca un cheat valido")
+            elif opcion == "2":
+                clave = "none"
+                aux = False
+            else:
+                print("Introduzca una opcion valida")
+
             
         field = [["■","■","■","■","■","■","■","■","■","■"],
                  ["■","■","■","■","■","■","■","■","■","■"],
@@ -219,17 +312,22 @@ def main():
                  ["■","■","■","■","■","■","■","■","■","■"]]
           
         creacion = Creacion_barcos(field)
-        #Para efectos de correccion quitar los #
-        for i in range(len(creacion)):
-            print(creacion[i])
+        if clave == "correccion":
+            for i in range(len(creacion)):
+                print(creacion[i])
+        elif clave == "none":
+            print("Buena Suerte")
         aux2 = True
         shots = 0
         puntos = 0
         repetido = 0
         while aux2 == True:
             juego = Game(field)
-            for i in range(len(creacion)):
-                print(creacion[i])
+            if clave == "correccion":
+                for i in range(len(creacion)):
+                    print(creacion[i])
+            elif clave == "none":
+                print(".")
             if juego == "Hit":
                 shots += 1
                 puntos += 10
@@ -252,7 +350,6 @@ def main():
                     y += 1
                 else:
                     x += 1
-            #Para efectos de correccion quitar los #
             print(juego)
         for y in range(len(field)):
             for x in range(len(field[y])):
@@ -273,6 +370,7 @@ def main():
             print(creacion[i])
         for user in player:
             print(user.Estadisticas())
+        Leaderboard()
         aux3 = True
         while aux3 == True:
             opcion = input("Desea volver a jugar: (1) Si , (2) No: ")
