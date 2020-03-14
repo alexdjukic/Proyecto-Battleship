@@ -18,25 +18,45 @@ def Datos(username):
         La funcion crea un objeto de la clase usuario con todos estos parametros y luego lo retorna
     """
     aux = True
+    completo = []
     while aux == True:
-        nombre = input("Introduzca su Nombre Completo: ").lower()
+        nombre = input("Introduzca su Nombre: ").lower()
         name = list(nombre)
-        if nombre == " ":
-            print("Ingrese un nombre valido")
-        elif nombre.isdecimal():
-            print("Ingrese un nombre valido")
-        else:
-            aux2 = True
-            i = 0
-            while aux2 == True:
-                if i == len(name):
-                    aux2 = False
-                    aux = False
-                elif name[i].isdecimal():
-                    print("Ingrese un nombre valido")
-                    aux2 = False
-                else:
-                    i += 1
+        aux2 = True
+        i = 0
+        while aux2 == True:
+            if nombre.isdecimal():
+                print("Introduzca un nombre valido")
+                aux2 = False
+            elif nombre.isalpha():
+                completo.append(nombre)
+                aux2 = False
+                aux = False
+            elif i == len(name):
+                print("Introduzca un nombre valido")
+                aux2 = False
+            else: 
+                i += 1
+    aux = True
+    while aux == True:
+        apellido = input("Introduzca su apellido: ").lower()
+        ape = list(apellido)
+        aux2 = True
+        i = 0
+        while aux2 == True:
+            if apellido.isdecimal():
+                print("Ingrese un apellido valido")
+                aux2 = False
+            elif apellido.isalpha():
+                completo.append(apellido)
+                aux2 = False
+                aux = False
+            elif i == len(ape):
+                print("Ingrese un apellido valido")
+                aux2 = False
+            else:
+                i += 1
+    persona = " ".join(completo)
                 
     aux = True
     while aux == True:
@@ -62,7 +82,7 @@ def Datos(username):
     
     puntos = 0
     shots = 0
-    user = Usuario(username,nombre,edad,genero,puntos,shots)
+    user = Usuario(username,persona,edad,genero,puntos,shots)
     return user
 
 def Creacion_barcos(field):
