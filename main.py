@@ -4,6 +4,61 @@ from Flota import Flota
 from Buque_3 import Buque_3
 from Buque_2 import Buque_2
 from Submarino import Submarino
+def Player(username):
+    """Funcion encargada de verificar la existencia de un username
+
+        La funcion recibe la variable username y crea una lista con los datos del archivo data.txt, luego recorre la lista y 
+        chequea si el username introducido ya existe en la base de datos, si es asi, le da el chance al jugador de cambiar sus datos llamando a 
+        la funcion Datos, donde se introducen los datos del jugador. En caso de no existir el username, llama a la funcion datos para que el nuevo 
+        usuario pueda introducir sus datos y empezar a jugar
+
+        retorna la vaariable us que a su vez recibe al objeto usuario de la clase Datos y la pasa al main
+    
+    """
+    players = []
+    nameuser = []
+    exists = False
+    u = 0
+    with open("Data.txt","r") as data:
+        for user in data:
+            players.append(user.split(","))
+    for i in range(len(players)):
+        nameuser.append(players[i][0])
+
+    for i in range(len(nameuser)):
+        if nameuser[i] == username:
+            u = i
+            exists = True
+        elif i == len(nameuser):
+            exists = False
+
+    if exists == True:
+        edit = input("Username existente, desea editar sus datos: (1) Si, (2) No: ")
+        if edit == "1":
+            players = []
+            with open("Data.txt","r") as data:
+                for user in data:
+                    players.append(user.split(","))
+            for i in range(len(players)):
+                if i == u:
+                    players.remove(players[u])
+            with open("Data.txt","w") as data:
+                for i in range(len(players)):
+                    data.write(players[i][0] + ",")
+                    data.write(players[i][1] + ",")
+                    data.write(players[i][2] + ",")
+                    data.write(players[i][3] + ",")
+                    data.write(players[i][4] + ",")
+                    data.write(players[i][5].strip() + "\n")
+            us = Datos(username)
+            return us 
+        elif edit == "2":
+            us = Datos(username)
+            return us
+    elif exists == False:
+        print("Username valido")
+        us = Datos(username)
+        return us
 def Datos(username):
     """ Funcion encargada de recopilar todos los datos del usuario para luegos enviarlos a la clase Usuario.
 
@@ -255,6 +310,7 @@ def Top10():
     """
     with open("Leaderboard.txt","r") as leader:
         print("---Top 10---")
+        print("username/puntos/disparos")
         for player in leader:
             player = player.strip()
             print(player)
@@ -298,8 +354,8 @@ def main():
                     else:
                         i += 1
 
-        us = Datos(username)
-        player.append(us)
+        usuario = Player(username)
+        player.append(usuario)
         aux = True
         while aux == True:
             opcion = input("Desea introducir un cheat: (1) Si, (2) No: ")

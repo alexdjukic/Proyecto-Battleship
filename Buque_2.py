@@ -74,7 +74,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif y == 0:
+                            elif y == 0 and x != 9 and x != 0:
                                 if field[y][x-1] != "B" and field[y+1][x-1] != "B" and field[y][x+1] != "B" and field[y+1][x+1] != "B" and field[y+2][x] != "B" and field[y+1][x] != "B":
                                     field[y][x] = "B"
                                     field[y+1][x] = "B"
@@ -82,7 +82,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif y == 9:
+                            elif y == 9 and x != 9 and x != 0:
                                 if field[y][x-1] != "B" and field[y-1][x-1] != "B" and field[y][x+1] != "B" and field[y-1][x+1] != "B" and field[y-2][x] != "B" and field[y-1][x] != "B":
                                     field[y][x] = "B"
                                     field[y-1][x] = "B"
@@ -90,7 +90,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif x == 0:
+                            elif x == 0 and y != 9 and y != 0:
                                 if field[y-1][x] != "B" and field[y][x+1] != "B" and field[y+1][x+1] != "B" and field[y+2][x] != "B" and field[y+1][x] != "B":
                                     field[y][x] = "B"
                                     field[y+1][x] = "B"
@@ -106,7 +106,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif y == 8:
+                            elif y == 8 and x != 9 and x != 0:
                                 if field[y-1][x] != "B" and field[y][x-1] != "B" and field[y+1][x-1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
                                     field[y+1][x] = "B"
@@ -160,7 +160,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif y == 0:
+                            elif y == 0 and x != 9 and x != 0:
                                 if field[y][x-1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+2] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
                                     field[y][x+1] = "B"
@@ -168,7 +168,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif y == 9:
+                            elif y == 9 and x != 0 and x != 9:
                                 if field[y][x-1] != "B" and field[y-1][x] != "B" and field[y-1][x+1] != "B" and field[y][x+2] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
                                     field[y][x+1] = "B"
@@ -176,7 +176,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif x == 0:
+                            elif x == 0 and y != 0 and y != 9:
                                 if field[y-1][x] != "B" and field[y-1][x+1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+2] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
                                     field[y][x+1] = "B"
@@ -184,7 +184,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif x == 9:
+                            elif x == 9 and y != 0 and y != 9:
                                 if field[y-1][x-1] != "B" and field[y-1][x] != "B" and field[y][x-2] != "B" and field[y+1][x-1] != "B" and field[y+1][x] != "B" and field[y][x-1] != "B":
                                     field[y][x] = "B"
                                     field[y][x-1] = "B"
@@ -192,7 +192,7 @@ class Buque_2(Flota):
                                 else:
                                     rand_y = random.randrange(10)
                                     rand_x = random.randrange(10)
-                            elif x == 8:
+                            elif x == 8 and y != 0 and y != 9:
                                 if field[y-1][x] != "B" and field[y][x-1] != "B" and field[y+1][x] != "B" and field[y+1][x+1] != "B" and field[y][x+1] != "B":
                                     field[y][x] = "B"
                                     field[y][x+1] = "B"

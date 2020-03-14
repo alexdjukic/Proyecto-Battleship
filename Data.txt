@@ -1,3 +1,5 @@
-alejo,alejandro djukic,20,Masculino,90,9
 juan,juan bello,12,Masculino,86,11
 pedro,pedro juan,25,Femenino,86,11
+aslejo,alejandro djukic,12,Masculino,86,11
+yukipak,alejo djukic,20,Masculino,86,11
+alejo,alejandro djukic,20,Masculino,88,10
