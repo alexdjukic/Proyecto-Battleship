@@ -53,8 +53,21 @@ def Player(username):
             us = Datos(username)
             return us 
         elif edit == "2":
-            us = Datos(username)
-            return us
+            players = []
+            with open("Data.txt","r") as data:
+                for user in data:
+                    players.append(user.split(","))
+
+            for i in range(len(players)):
+                if players[i][0] == username:
+                    nombre = players[i][1]
+                    edad = players[i][2]
+                    genero = players[i][3]
+
+            puntos = 0
+            shots = 0
+            user = Usuario(username,nombre,edad,genero,puntos,shots)
+            return user  
     elif exists == False:
         print("Username valido")
         us = Datos(username)
